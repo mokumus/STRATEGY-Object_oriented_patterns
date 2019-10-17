@@ -1,7 +1,7 @@
 package com.muhammedokumus;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface SolvingStrategy {
-    double solveLinearEquation(List<String> equations);
+    double solveLinearEquation(ArrayList<ArrayList<Integer>> equationMatrix);
 }

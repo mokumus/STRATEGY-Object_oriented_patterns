@@ -9,7 +9,7 @@ class Solver {
         this.strategy = strategy;
     }
 
-    void solveSystem(ArrayList<String> equations) {
+    void solveSystem(ArrayList<ArrayList<Integer>> equations) {
         strategy.solveLinearEquation(equations);
     }
 }
