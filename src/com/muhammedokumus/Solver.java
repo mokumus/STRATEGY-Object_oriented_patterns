@@ -1,6 +1,5 @@
 package com.muhammedokumus;
 
-import java.util.ArrayList;
 
 class Solver {
     private SolvingStrategy strategy;
@@ -9,7 +8,7 @@ class Solver {
         this.strategy = strategy;
     }
 
-    void solveSystem(ArrayList<ArrayList<Integer>> equations) {
+    void solveSystem(float[][] equations) {
         strategy.solveLinearEquation(equations);
     }
 }

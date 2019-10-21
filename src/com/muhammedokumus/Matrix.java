@@ -1,37 +1,31 @@
 package com.muhammedokumus;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.StringJoiner;
 
 class Matrix {
 
-    private ArrayList<ArrayList<Integer>> m;
+    private float[][] m;
 
-    Matrix(ArrayList<ArrayList<Integer>> m) {
-        //Matrix is complete and square.
-        if(isValid(m) & m.size() == m.get(0).size() - 1){
-            this.m = m;
-        }
-        else
-            throw new IllegalArgumentException("Matrix doesn't have same amount of columns.");
+    Matrix(float[][] m) {
+        this.m = m;
+        display();
     }
 
-
-    /**
-     * Checks if the matrix has same number of columns.
-     * @return true if matrix is valid, false otherwise
-     */
-    private boolean isValid(ArrayList<ArrayList<Integer>> m){
-        int tempSize = m.get(0).size();
-
-        for(ArrayList<Integer> e : m){
-            if(e.size() != tempSize)
-                return false;
-        }
-        return true;
+    float[][] getM() {
+        return m;
     }
 
-    @Override
-    public String toString() {
-        return "Matrix" + m;
+    void display() {
+        for (float[] floats : m) {
+            for (int j = 0; j < m[0].length; j++) {
+                if (j == 0)
+                    System.out.print(floats[j]);
+                else if (j - 1 == m[0].length - 2)
+                    System.out.print(String.format(" | %3s", floats[j]));
+                else
+                    System.out.print(String.format(",%10s", floats[j]));
+            }
+        }
     }
 }
