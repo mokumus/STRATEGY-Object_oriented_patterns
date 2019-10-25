@@ -9,13 +9,15 @@ public class GaussianEliminationStrategy implements SolvingStrategy {
     @Override
     public float[] solveLinearEquation(float[][] equationMatrix) {
         Matrix m = new Matrix(equationMatrix);
-        return gaussianElimination(m.getM());
+        return gaussianElimination(m);
     }
 
 
-    private float[] gaussianElimination(float[][] matrixEquations) {
+    private float[] gaussianElimination(Matrix m) {
+        float[][] matrixEquations = m.getM();
         int n = matrixEquations.length; //Number of rows
-
+        System.out.println("Gauss Elimination Input Matrix: ");
+        m.display();
         for (int i = 0; i < n; i++) {
             // Search for maximum in this column
             float maxEl = abs(matrixEquations[i][i]);
@@ -44,6 +46,8 @@ public class GaussianEliminationStrategy implements SolvingStrategy {
                 }
             }
         }
+        System.out.println("Reduced Matrix: ");
+        m.display();
         // Solve equation Ax=b for an upper triangular matrix A
         float[] solutions = new float[matrixEquations.length];
         for (int i = n - 1; i >= 0; i--) {
@@ -53,6 +57,7 @@ public class GaussianEliminationStrategy implements SolvingStrategy {
             }
         }
         //Print results
+        System.out.println("Solution: ");
         for(int i=0; i <matrixEquations.length; i++)
             System.out.println("x" + i + ": " + solutions[i]);
 
