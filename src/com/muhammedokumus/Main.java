@@ -1,8 +1,6 @@
 package com.muhammedokumus;
 
-import java.util.ArrayList;
-
-public class Main {
+class Main {
 
     public static void main(String[] args) {
 	    Solver mySolver = new Solver();
@@ -15,6 +13,10 @@ public class Main {
 
 
 	    mySolver.solveSystem(eqs);
+
+        Matrix m = new Matrix(5);
+        m.display();
+        System.out.println("m= " + m.getM());
 
 
 

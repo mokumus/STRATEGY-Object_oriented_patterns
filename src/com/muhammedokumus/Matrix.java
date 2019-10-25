@@ -6,13 +6,51 @@ class Matrix {
 
     Matrix(float[][] m) { this.m = m; }
 
+    /**
+     * Creates a identity matrix with given size parameter
+     * @param size size of square matrix
+     */
+    Matrix(int size) { this.m = createIdentityMatrix(size); }
+
     float[][] getM() {
         return m;
     }
+
     /**
      * Prints the Matrix in a user friendly way.
      */
     void display() {
+        display(this.m);
+    }
+
+    /**
+     * Prints the given 2d float array in a user friendly way.
+     * @param m matrix to be printed
+     */
+    void display(float[][] m) {
+        for (float[] floats : m) {
+            for (int j = 0; j < m[0].length; j++) {
+                if (j == 0)
+                    System.out.print(floats[j]);
+                else
+                    System.out.print(String.format(",%6s", floats[j]));
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * Prints the Matrix as if it's an augmented matrix.
+     */
+    void displayAugmented() {
+        displayAugmented(this.m);
+    }
+
+    /**
+     * Prints the given 2d float array as if it's an augmented matrix.
+     * @param m matrix to be printed
+     */
+    void displayAugmented(float[][] m){
         for (float[] floats : m) {
             for (int j = 0; j < m[0].length; j++) {
                 if (j == 0)
@@ -25,6 +63,20 @@ class Matrix {
             System.out.println();
         }
     }
+
+    private float[][] createIdentityMatrix(int size){
+        float[][] m = new float[size][size];
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(i == j)
+                    m[i][j] = 1;
+                else
+                    m[i][j] = 0;
+            }
+        }
+        return m;
+    }
+
     /**
      * @return true if Matrix is a reducible matrix
      */
