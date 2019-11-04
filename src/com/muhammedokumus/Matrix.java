@@ -1,9 +1,18 @@
 package com.muhammedokumus;
 
+/**
+ * Provides matrix display utilities for normal and augmented matrices
+ */
 class Matrix {
 
+    /**
+     * A primitive 2D array of floats
+     */
     private float[][] m;
 
+    /**
+     * @param m A primitive 2D array of floats
+     */
     Matrix(float[][] m) { this.m = m; }
 
     /**
@@ -12,6 +21,9 @@ class Matrix {
      */
     Matrix(int size) { this.m = createIdentityMatrix(size); }
 
+    /**
+     * @return A primitive 2D array of floats
+     */
     float[][] getM() {
         return m;
     }
@@ -64,6 +76,10 @@ class Matrix {
         }
     }
 
+    /**
+     * @param size of the square matrix
+     * @return identity matrix as 2D array of floats[size][size]
+     */
     private float[][] createIdentityMatrix(int size){
         float[][] m = new float[size][size];
         for(int i = 0; i < size; i++){
@@ -78,11 +94,12 @@ class Matrix {
     }
 
     /**
-     * @return true if Matrix is a reducible matrix
+     * Check if matrix is augmented
+     * @return true if Matrix is an augmented matrix, false otherwise
      */
     boolean isValidInput(){
         for(float[] i : this.m){
-            if(i.length != this.m.length && i.length == this.m[0].length + 1) //+1 because rows include the right side of the equation
+            if(m.length != i.length - 1) //-1 because we are checking for augmented matrices
                 return false;
         }
         return true;
@@ -111,4 +128,6 @@ class Matrix {
         }
         return true;
     }
+
+
 }

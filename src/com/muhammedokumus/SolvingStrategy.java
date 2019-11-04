@@ -1,5 +1,5 @@
 package com.muhammedokumus;
 
 interface SolvingStrategy {
-    float[] solveLinearEquation(float[][] equationMatrix);
+    float[] solveLinearEquations(float[][] augmentedMatrix);
 }

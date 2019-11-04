@@ -3,22 +3,44 @@ package com.muhammedokumus;
 
 import static java.lang.Math.abs;
 
+/**
+ * Solver strategy class that utilizes Gaussian Elimination
+ */
 public class GaussianEliminationStrategy implements SolvingStrategy {
 
 
-    @Override
-    public float[] solveLinearEquation(float[][] equationMatrix) {
-        Matrix m = new Matrix(equationMatrix);
-        return gaussianElimination(m);
+    /**
+     * Solves linear equation system using Gaussian Elimination method(Wrapper)
+     * @param augmentedMatrix an augmented matrix(m x (m+1) sized)
+     * @return float[m] of solution in respect to x0,x1,... xn
+     */
+    public float[] solveLinearEquations(float[][] augmentedMatrix) {
+        System.out.println("Gaussian way!");
+        Matrix m = new Matrix(augmentedMatrix);
+        System.out.println("Matrix inputted: ");
+
+        if(m.isValidInput()){
+            m.displayAugmented();
+            return solve(m);
+        }
+
+        else{
+            m.displayAugmented();
+            System.out.println("Invalid matrix format, it should be m x (m+1) sized augmented matrix.");
+            return null;
+        }
+
     }
 
 
-    private float[] gaussianElimination(Matrix augmentedMatrix) {
+    /**
+     * Solves linear equation system using Gaussian Elimination method(Actual method)
+     * @param augmentedMatrix an augmented matrix(m x (m+1) sized)
+     * @return float[m] of solution in respect to x0,x1,... xn
+     */
+    private float[] solve(Matrix augmentedMatrix) {
         float[][] m = augmentedMatrix.getM();
         int n = m.length; //Number of rows
-
-        System.out.println("Gauss Elimination Input Matrix: ");
-        augmentedMatrix.displayAugmented();
 
         for (int i = 0; i < n; i++) {
             // Search for maximum in this column
@@ -50,19 +72,25 @@ public class GaussianEliminationStrategy implements SolvingStrategy {
         }
         System.out.println("Reduced Matrix: ");
         augmentedMatrix.displayAugmented();
-        // Solve equation Ax=b for an upper triangular matrix A
-        float[] solutions = new float[m.length];
-        for (int i = n - 1; i >= 0; i--) {
-            solutions[i] = m[i][n]/m[i][i];
-            for (int k = i - 1; k >= 0; k--) {
-                m[k][n] -= m[k][i] * solutions[i];
-            }
-        }
-        //Print results
-        System.out.println("Solution: ");
-        for(int i=0; i <m.length; i++)
-            System.out.println("x" + i + ": " + solutions[i]);
 
-        return solutions;
+       if(augmentedMatrix.isUpperTriangle()){
+           float[] solutions = new float[m.length];
+           for (int i = n - 1; i >= 0; i--) {
+               solutions[i] = m[i][n]/m[i][i];
+               for (int k = i - 1; k >= 0; k--) {
+                   m[k][n] -= m[k][i] * solutions[i];
+               }
+           }
+           //Print results
+           System.out.println("Solution: ");
+           for(int i=0; i <solutions.length; i++)
+               System.out.println("x" + i + ": " + solutions[i]);
+
+           return solutions;
+       }
+       else{
+           System.out.println("Couldn't reduce the matrix to upper triangle form.");
+           return null;
+       }
     }
 }
